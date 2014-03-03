@@ -1,0 +1,13 @@
+{
+  "name": "grunt-organic",
+  "version": "0.0.0",
+  "description": "Basic grunt setup for working with Organic .NET projects",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-sass": "~0.7.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-autoprefixer": "~0.7.2",
+    "load-grunt-tasks": "~0.4.0"
+  }
+}
