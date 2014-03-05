@@ -1,4 +1,10 @@
 module.exports = function (grunt) {
+    // This is the name of the folder that contains your project. It should be at the same directory level as your Gruntfile.
+    // Pass `false` or an empty string if not using a project sub-folder.
+    var baseDir = 'project';
+
+        baseDir = baseDir || '.';
+
     // Load in all our tasks.
     require('load-grunt-tasks')(grunt);
 
@@ -16,9 +22,9 @@ module.exports = function (grunt) {
                 // Compile all .scss files in our sass folder to our css folder.
                 files: [{
                     expand: true,
-                    cwd: 'sass',
+                    cwd: baseDir + '/sass',
                     src: ['*.scss'],
-                    dest: 'css',
+                    dest: baseDir + '/css',
                     ext: '.css'
                 }]
             }
@@ -47,7 +53,7 @@ module.exports = function (grunt) {
 
             // List the css files sass generated so we just write over them.
             no_dest: {
-                src: 'css/style.css'
+                src: baseDir + '/css/style.css'
             }
         },
 
@@ -61,13 +67,13 @@ module.exports = function (grunt) {
 
             // Update styles.
             sass: {
-                files: 'sass/*.scss',
+                files: baseDir + '/sass/*.scss',
                 tasks: ['sass', 'autoprefixer']
             },
 
             // Update javascript.
             scripts: {
-                files: 'js/*.js',
+                files: baseDir + '/js/*.js',
                 // tasks: ['jshint']
             },
 
@@ -76,13 +82,16 @@ module.exports = function (grunt) {
 // TODO: Investigate alternate option of injecting tag with connect-load middleware.
             livereload: {
                 options: { livereload: true },
-                // Files we want lr to repsond to. 
+                // Files we want lr to repsond to.
+                // Alter to match your project's folder names.
                 files: [
-                    '*.html',
-                    '*.aspx',
-                    'css/*.css',
-                    'js/*.js',
-                    'img/*'
+                    baseDir + '/*.html',
+                    baseDir + '/*.aspx',
+                    baseDir + '/**/*.aspx',
+                    baseDir + '/css/*.css',
+                    baseDir + '/js/*.js',
+                    baseDir + '/img/**/*.png',
+                    baseDir + '/img/**/*.jpg'
                 ]
             }       
         },
@@ -120,5 +129,6 @@ module.exports = function (grunt) {
     // Execute by just running `grunt`
     grunt.registerTask('default', ['sass', 'autoprefixer']);
     // `grunt dev` starts watch task/livereload for better development process.
+    // This is currently the same as running `grunt watch`.
     grunt.registerTask('dev', ['watch']);
 };
